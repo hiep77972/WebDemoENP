@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Soát xét hóa đơn, dự báo số tiền thuế phải nộp">
+  <meta name="keywords"
+    content="hóa đơn, chứng từ, invoice, kê khai, báo cáo tài chính, soát xét chứng từ, soát xét hóa đơn, iap, dịch vụ iap, dự báo số tiền thuế phải nộp">
+  <meta name="author" content="hiep">
+  <title>ENP</title>
+  <link rel="shortcut icon" href="./assets/img/favicon.png">
+  <link rel="stylesheet" href="./assets/css/plugins.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/colors/aqua.css">
+  <link rel="preload" href="./assets/css/fonts/iap.css" as="style" onload="this.rel='stylesheet'">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap"
+    rel="stylesheet">
+  <style>
+    /* width */
+    ::-webkit-scrollbar {
+      width: 9px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #ffe1d5;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #005372;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffa366;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-wrapper">
+    <header class="wrapper bg-iap">
+      <nav class="navbar navbar-expand-lg center-nav transparent navbar-dark">
+        <div class="container flex-lg-row flex-nowrap align-items-center">
+          <div class="navbar-brand w-100">
+            <a href="./index.html">
+              <img class="logo-dark" src="./assets/img/logo-dark.png" srcset="./assets/img/logo-dark@2x.png 2x"
+                alt="" />
+              <img class="logo-light" src="./assets/img/logo-light.png" srcset="./assets/img/logo-light@2x.png 2x"
+                alt="" />
+            </a>
+          </div>
+          <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+            <div class="offcanvas-header d-lg-none">
+              <h3 class="text-white fs-30 mb-0">ENP</h3>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown dropdown-mega">
+                  <a class="nav-link" href="#" data-bs-toggle="dropdown">Giới thiệu</a>
+                </li>
+                <li class="nav-item dropdown dropdown-mega">
+                  <a class="nav-link" href="#" data-bs-toggle="dropdown">Tính năng</a>
+                </li>
+                <li class="nav-item dropdown dropdown-mega">
+                  <a class="nav-link" href="#" data-bs-toggle="dropdown">Hướng dẫn</a>
+                </li>
+              </ul>
+              <!-- /.navbar-nav -->
+              <div class="offcanvas-footer d-lg-none">
+                <div>
+                  <nav class="nav social social-white mt-4">
+                    <a href="#"><i class="uil uil-twitter"></i></a>
+                    <a href="#"><i class="uil uil-facebook-f"></i></a>
+                    <a href="#"><i class="uil uil-dribbble"></i></a>
+                    <a href="#"><i class="uil uil-instagram"></i></a>
+                    <a href="#"><i class="uil uil-youtube"></i></a>
+                  </nav>
+                  <!-- /.social -->
+                </div>
+              </div>
+              <!-- /.offcanvas-footer -->
+            </div>
+            <!-- /.offcanvas-body -->
+          </div>
+          <!-- /.navbar-collapse -->
+          <div class="navbar-other w-100 d-flex ms-auto">
+            <ul class="navbar-nav flex-row align-items-center ms-auto">
+              <!-- <li class="nav-item"><a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search"><i class="uil uil-search"></i></a></li> -->
+              <li class="nav-item d-none d-md-block">
+                <a href="#" class="btn btn-sm btn-white rounded">Liên hệ</a>
+              </li>
+              <li class="nav-item d-lg-none">
+                <button class="hamburger offcanvas-nav-btn"><span></span></button>
+              </li>
+            </ul>
+            <!-- /.navbar-nav -->
+          </div>
+          <!-- /.navbar-other -->
+        </div>
+        <!-- /.container -->
+      </nav>
+      <!-- /.navbar -->
+      <div class="offcanvas offcanvas-top bg-light" id="offcanvas-search" data-bs-scroll="true">
+        <div class="container d-flex flex-row py-6">
+          <form class="search-form w-100">
+            <input id="search-form" type="text" class="form-control" placeholder="Type keyword and hit enter">
+          </form>
+          <!-- /.search-form -->
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.offcanvas -->
+    </header>
+    <!-- /header -->
+    <section class="wrapper bg-iap angled lower-start">
+      <div class="container pt-7 pt-md-11 pb-8">
+        <div class="row gx-0 gy-10 align-items-center">
+          <div class="col-lg-6" data-cues="slideInDown" data-group="page-title" data-delay="600">
+             <!-- #93ddff -->
+            <h1 class="display-1 text-white mb-4">ENP<span class="fs-28"> - Phần mềm quản lý Sản xuất bao bì Offset, Carton</span></h1>
+            <h4 class="text-white mb-4">
+              <span class="text-auto-iap" data-delay="100"><i class="uil uil-invoice"></i>&nbsp;Giao diện thân thiện đến từng công đoạn</span>
+            </h4>
+            <h4 class="text-white mb-4">
+              <span class="text-auto-iap" data-delay="100"><i class="uil uil-chart-line"></i>&nbsp;Lập kế hoạch theo ngày và giao việc đến cá nhân</span>
+            </h4>
+            <h4 class="text-white mb-4">
+              <span class="text-auto-iap" data-delay="100"><i class="uil uil-upload-alt"></i>&nbsp;Đáp ứng tiêu chuẩn ISO 9001-2015</span>
+            </h4>
+            <p class="lead fs-24 lh-sm text-white mb-7 pe-lg-0"><i>ENP là sự kết hợp hoàn hảo kinh nghiệm của các CEO sản xuất bao bì với các IT chuyên nghiệp. được lập trình sáng tạo theo tư duy quản trị hiện đại, tích hợp trên nền tảng điện toán đám mây, đa thiết bị cho phép sử dụng bằng điện thoại, máy tính.</i></p>
+            <div>
+              <a data-bs-toggle="modal" data-bs-target="#modalENP" class="btn btn-lg btn-white rounded">Tìm hiểu thêm</a>
+            </div>
+          </div>
+          <!-- /column -->
+          <div class="col-lg-5 offset-lg-1 mb-n18" data-cues="slideInDown">
+            <div class="position-relative">
+              <a href="./assets/media/movie.mp4"
+                class="btn btn-circle btn-primary btn-play ripple mx-auto mb-6 position-absolute"
+                style="top:50%; left: 50%; transform: translate(-50%,-50%); z-index:3;" data-glightbox><i
+                  class="icn-caret-right"></i></a>
+              <figure class="rounded shadow-lg"><img src="./assets/img/photos/intro-IAP.jpg"
+                  srcset="./assets/img/photos/intro-IAP.jpg.jpg 2x" alt=""></figure>
+            </div>
+            <!-- /div -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper bg-light">
+      <div class="container pt-19 pt-md-21 pb-16 pb-md-18">
+        <div class="row">
+          <div class="col-lg-8 col-xl-7 col-xxl-9">
+            
+          </div>
+          <!-- /column -->
+        </div>
+<!-- /.row -->
+<div class="row gx-md-8 gy-8 mb-14 mb-md-18">
+  <div class="col-md-6 col-lg-3">
+    <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i class="uil uil-phone-volume"></i>
+    </div>
+    <h4>Hỗ trợ 24/7</h4>
+    <p class="mb-3">Mọi lúc, mọi nơi.</p>
+    <a data-bs-toggle="modal" data-bs-target="#modal247" style="cursor: pointer;"
+      class="more hover link-primary">Tìm hiểu thêm</a>
+  </div>
+  <!--/column -->
+  <div class="col-md-6 col-lg-3">
+    <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i
+        class="uil uil-shield-exclamation"></i> </div>
+    <h4>Bảo mật dữ liệu</h4>
+    <p class="mb-3">Dữ liệu được xử lý tự động, hạn chế tương tác của con người, bảo mật cao, phân quyền quản lý ngăn ngừa rò rỉ thông tin doanh nghiệp.</p>
+    <a data-bs-toggle="modal" data-bs-target="#secure" style="cursor: pointer;"
+      class="more hover link-primary">Tìm hiểu thêm</a>
+  </div>
+  <!--/column -->
+  <div class="col-md-6 col-lg-3">
+    <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i class="uil uil-laptop-cloud"></i>
+    </div>
+    <h4>Cập nhật nâng cấp</h4>
+    <p class="mb-3">Luôn cập nhật, nâng cấp để đáp ứng các yêu cầu phát sinh trong sản xuất.</p>
+    <a data-bs-toggle="modal" data-bs-target="#updateDaily" style="cursor: pointer;"
+      class="more hover link-primary">Tìm hiểu thêm</a>
+  </div>
+  <!--/column -->
+  <div class="col-md-6 col-lg-3">
+    <div class="icon btn btn-block btn-lg btn-soft-primary pe-none mb-6"> <i class="uil uil-chart-growth"></i>
+    </div>
+    <h4>Lợi ích khi sử dụng</h4>
+    <p class="mb-3">Tăng hiệu suất làm việc của nhân viên lên đến 90 %, công nhân nhận lệnh sản xuất rõ ràng, thao tác đơn giản, giảm sai sót, khắc phục tình trạng khó kiểm soát sai hỏng, công nhân không theo sát tiến độ, hay đổ lỗi.</p>
+    <a data-bs-toggle="modal" data-bs-target="#benefit" style="cursor: pointer;"
+      class="more hover link-primary">Tìm hiểu thêm</a>
+  </div>
+  <!--/column -->
+</div>
+<!--/.row -->
+
+
+        <div class="row gy-10 gy-sm-13 gx-lg-3 mb-16 mb-md-18 align-items-center">
+          <div class="col-md-8 col-lg-6 position-relative">
+            <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1" style="top: -2rem; left: -1.9rem;">
+            </div>
+            <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+              style="bottom: -1.8rem; right: -1.5rem; width: 85%; height: 90%; "></div>
+            <figure class="rounded"><img src="./assets/img/photos/about7.jpg"
+                srcset="./assets/img/photos/about7@2x.jpg 2x" alt="" /></figure>
+          </div>
+          <!--/column -->
+          <div class="col-lg-5 col-xl-5 offset-lg-1">
+            <h2 class="fs-16 text-uppercase text-line text-primary mb-3"></h2>
+            <h3 class="display-4 mb-7">Các bước triển khai phần mềm</h3>
+            <div class="d-flex flex-row ">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">1</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Khảo sát doanh nghiệp</h4>
+                <p class="mb-0">Quy trình sản xuất, mẫu biểu sử dụng, hệ thống CNTT.</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row ">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">2</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Đề xuất giải pháp</h4>
+                <p class="mb-0">Căn cứ kết quả khảo sát và yêu cầu của doanh nghiệp đề xuất giải pháp phù hợp.</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">3</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Ký hợp đồng</h4>
+                <p class="mb-0">Thương thảo nội dung hợp đồng và lập kế hoạch triển khai.</p>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">4</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Lập trình</h4>
+                <p class="mb-0">Tạo phiên bản mới cho doanh nghiệp.</p>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">5</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Demo và Cài đặt dùng thử</h4>
+                <p class="mb-0">Cài đặt, HDSD dùng thử, hoàn thiện tính năng.</p>
+              </div>
+            </div>
+
+            <div class="d-flex flex-row">
+              <div>
+                <span class="icon btn btn-block btn-soft-primary pe-none me-5"><span
+                    class="number fs-18">6</span></span>
+              </div>
+              <div>
+                <h4 class="mb-1">Bàn giao sử dụng và bảo trì</h4>
+                <p class="mb-0">Hỗ trợ 24/7 trong suốt quá trình sử dụng.</p>
+              </div>
+            </div>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+
+        
+
+        <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
+          <div class="col-md-8 col-lg-6 offset-lg-1 order-lg-2 position-relative">
+            <div class="shape rounded-circle bg-line primary rellax w-18 h-18" data-rellax-speed="1"
+              style="top: -2rem; right: -1.9rem;"></div>
+            <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+              style="bottom: -1.8rem; left: -1.5rem; width: 85%; height: 90%; "></div>
+            <figure class="rounded"><img src="./assets/img/photos/about9.jpg"
+                srcset="./assets/img/photos/about9@2x.jpg 2x" alt=""></figure>
+          </div>
+          <!--/column -->
+          <div class="col-lg-5">
+            <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Tại sao chọn chúng tôi?</h2>
+            <h3 class="display-4 mb-7">Một vài lý do tại sao khách hàng quan trọng chọn chúng tôi.</h3>
+            <div class="accordion accordion-wrapper" id="accordionExample">
+              <div class="card plain accordion-item">
+                <div class="card-header" id="headingOne">
+                  <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne"> Đội ngũ chuyên nghiệp </button>
+                </div>
+                <!--/.card-header -->
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                  data-bs-parent="#accordionExample">
+                  <div class="card-body">
+                    <p>Lập trinh viên trẻ trung, sáng tạo và các CEO kinh nghiệm trong sản xuất bao bì.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.accordion-collapse -->
+              </div>
+              <!--/.accordion-item -->
+              <div class="card plain accordion-item">
+                <div class="card-header" id="headingTwo">
+                  <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+                    aria-expanded="false" aria-controls="collapseTwo"> Tùy biến cao </button>
+                </div>
+                <!--/.card-header -->
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                  data-bs-parent="#accordionExample">
+                  <div class="card-body">
+                    <p>Phần mềm được phát triển tại Việt Nam, dễ dàng nâng cấp, điều chỉnh phù hợp với mọi mô hình doanh nghiệp.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.accordion-collapse -->
+              </div>
+              <!--/.accordion-item -->
+              <div class="card plain accordion-item">
+                <div class="card-header" id="headingThree">
+                  <button class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                    aria-expanded="false" aria-controls="collapseThree"> Hỗ trợ hàng đầu </button>
+                </div>
+                <!--/.card-header -->
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                  data-bs-parent="#accordionExample">
+                  <div class="card-body">
+                    <p>Đội ngũ CSKH chuyên sâu, tận tâm nhiệt tình.</p>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.accordion-collapse -->
+              </div>
+              <!--/.accordion-item -->
+            </div>
+            <!--/.accordion -->
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper image-wrapper bg-image bg-overlay" data-image-src="./assets/img/photos/bg1.jpg">
+      <div class="container py-18">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="fs-16 text-uppercase text-line text-white mb-3">Tham gia với chúng tôi</h2>
+            <h3 class="display-4 mb-6 text-white pe-xxl-18">Hãy tham gia sử dụng phần mềm của chúng tôi và phát triển doanh nghiệp của bạn.</h3>
+            <a href="#" class="btn btn-white rounded mb-0 text-nowrap">Tham gia</a>
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper bg-soft-primary">
+      <div class="container py-14 pt-md-17 pb-md-21">
+        <div class="row gx-lg-8 gx-xl-12 gy-10 gy-lg-0 mb-2 align-items-end">
+          <div class="col-lg-4">
+            <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Thông tin công ty</h2>
+            <h3 class="display-4 mb-0 pe-xxl-15"><i>Chúng tôi tự hào về công việc của mình.</i></h3>
+          </div>
+          <!-- /column -->
+          <div class="col-lg-8 mt-lg-2">
+            <div class="row align-items-center counter-wrapper gy-6 text-center">
+              <div class="col-md-4">
+                <h3 class="counter counter-lg">3+</h3>
+                <p><i>Dự án hoàn thành chuyển đổi số quản lý sản xuất</i></p>
+              </div>
+              <!--/column -->
+              <div class="col-md-4">
+                <h3 class="counter counter-lg">500+</h3>
+                <p><i>Nhân sự đang sử dụng phần mềm</i></p>
+              </div>
+              <!--/column -->
+              <div class="col-md-4">
+                <h3 class="counter counter-lg">1+</h3>
+                <p><i>Giải thưởng doanh nghiệp công nghệ năm 2022</i></p>
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+    <section class="wrapper bg-light angled upper-end lower-start">
+      <div class="container py-16 py-md-18 position-relative">
+        <div class="row gy-6 mb-16 mb-md-18">
+          <!-- <div class="col-lg-2"> -->
+            <h2 class="fs-16 text-uppercase text-line text-primary mt-lg-18 mb-3">Báo giá phần mềm</h2>
+            <h3 class="display-4 mb-3">Chúng tôi cung cấp giá phần mềm.</h3>
+            <p>Tận hưởng Phần mềm quản lý sản xuất ENP và trải nghiệm dịch vụ đầy đủ.
+              Đăng ký ngay được 
+               <a href="#" class="hover">dùng thử 30 ngày</a>, …</p>
+            <!-- <a href="#" class="btn btn-primary rounded mt-2">Tất cả các giá</a> -->
+          <!-- </div> -->
+          <!--/column -->
+          <div class="col-lg-12 offset-lg-1 pricing-wrapper">
+
+            <div class="row gy-6 position-relative mt-5">
+              <div class="shape bg-dot primary rellax w-16 h-18" data-rellax-speed="1"
+                style="bottom: -0.5rem; right: -1.6rem;"></div>
+              <div class="shape rounded-circle bg-soft-primary rellax w-18 h-18" data-rellax-speed="1"
+                style="top: -1rem; left: -2rem;"></div>
+              <div class="col-md-4">
+                <div class="pricing card shadow-lg">
+                  <div class="card-body pb-12">
+                    <div class="prices text-dark">
+                      <div class="price price-show justify-content-start"><span
+                          class="price-value">150 tr</span>&nbsp;<span class="price-duration fs-24">+ phí bảo trì (15% hđ)</span></div>
+                    
+                    </div>
+                    <!--/.prices -->
+                    <h4 class="card-title mt-2 text-primary">Bản độc quyền</h4>
+                    <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8">
+                      <li><i class="uil uil-check"></i><span>Phù hợp với quy mô doanh thu 200 tỷ/năm</span></li>
+                    </ul>
+                    <a href="#" class="btn btn-primary rounded">Liên hệ</a>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.pricing -->
+              </div>
+              <!--/column -->
+              <div class="col-md-4 popular">
+                <div class="pricing card shadow-lg">
+                  <div class="card-body pb-12">
+                    <div class="prices text-dark">
+                      <div class="price price-show justify-content-start"><span
+                          class="price-value">25tr</span>&nbsp;<span class="price-duration fs-24">+ phí cho thuê/tháng</span></div>
+                      
+                    </div>
+                    <!--/.prices -->
+                    <h4 class="card-title mt-2 text-primary">Bản cho thuê</h4>
+                    <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8">
+                      <li><i class="uil uil-check"></i><span>Phù hợp với quy mô doanh thu dưới 50 tỷ/năm</span></li>
+                    </ul>
+                    <a href="#" class="btn btn-primary rounded">Liên hệ</a>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.pricing -->
+              </div>
+              <!--/column -->
+              <!--/column -->
+              <div class="col-md-4 popular">
+                <div class="pricing card shadow-lg">
+                  <div class="card-body pb-12">
+                    <div class="prices text-dark">
+                      <div class="price price-show justify-content-start"><span
+                          class="price-value">150tr</span>&nbsp;<span class="price-duration fs-24">+ 2,5tr/ngày công lập trình + phí bảo trì</span></div>
+                      
+                    </div>
+                    <!--/.prices -->
+                    <h4 class="card-title mt-2 text-primary">Bản nâng cấp</h4>
+                    <ul class="icon-list bullet-bg bullet-soft-primary mt-7 mb-8">
+                      <li><i class="uil uil-check"></i><span>Phù hợp với quy mô doanh thu trên 300 tỷ và nhiều điểm sản xuất.</span></li>
+                    </ul>
+                    <a href="#" class="btn btn-primary rounded">Liên hệ</a>
+                  </div>
+                  <!--/.card-body -->
+                </div>
+                <!--/.pricing -->
+              </div>
+              <!--/column -->
+            </div>
+            <!--/.row -->
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+        <div class="row gy-10 gy-sm-13 gx-lg-3 align-items-center">
+          <div class="col-md-8 col-lg-6 position-relative">
+            <div class="shape bg-dot primary rellax w-17 h-21" data-rellax-speed="1" style="top: -2rem; left: -1.9rem;">
+            </div>
+            <div class="shape rounded bg-soft-primary rellax d-md-block" data-rellax-speed="0"
+              style="bottom: -1.8rem; right: -1.5rem; width: 85%; height: 90%; "></div>
+            <figure class="rounded"><img src="./assets/img/photos/about14.jpg"
+                srcset="./assets/img/photos/about14@2x.jpg 2x" alt="" /></figure>
+          </div>
+          <!--/column -->
+          <div class="col-lg-5 col-xl-4 offset-lg-1">
+            <h2 class="fs-16 text-uppercase text-line text-primary mb-3">Liên lạc</h2>
+            <h2 class="display-4 mb-8">Hãy liên hệ với chúng tôi.</h2>
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-location-pin-alt"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">Địa chỉ</h5>
+                <address>Số 20 Lê Lợi, <br class="d-none d-md-block" />Hải Phòng, Việt Nam
+                </address>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-phone-volume"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">Số điện thoại</h5>
+                <p>0889.36.8080</p>
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div>
+                <div class="icon text-primary fs-28 me-6 mt-n1"> <i class="uil uil-envelope"></i> </div>
+              </div>
+              <div>
+                <h5 class="mb-1">E-mail</h5>
+                <p class="mb-0"><a href="mailto:hotro@thuemienbac.vn" class="link-body"><span class="__cf_email__"
+                      data-cfemail="d8abb9b6bcbab7a098bdb5b9b1b4f6bbb7b5">hotro@thuemienbac.vn</span></a></p>
+              </div>
+            </div>
+          </div>
+          <!--/column -->
+        </div>
+        <!--/.row -->
+      </div>
+      <!-- /.container -->
+    </section>
+    <!-- /section -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="bg-iap text-inverse">
+    <div class="container pt-17 pt-md-19 pb-13 pb-md-15">
+      <div class="row gy-6 gy-lg-0">
+        <div class="col-md-4 col-lg-3">
+          <div class="widget">
+            <img class="mb-4" src="./assets/img/logo-light.png" srcset="./assets/img/logo-light@2x.png 2x" alt="" />
+            <p class="mb-4">© 2023 ENP. <br class="d-none d-lg-block" />All rights reserved.</p>
+            <nav class="nav social social-white">
+              <a href="#"><i class="uil uil-twitter"></i></a>
+              <a href="#"><i class="uil uil-facebook-f"></i></a>
+              <a href="#"><i class="uil uil-dribbble"></i></a>
+              <a href="#"><i class="uil uil-instagram"></i></a>
+              <a href="#"><i class="uil uil-youtube"></i></a>
+            </nav>
+            <!-- /.social -->
+          </div>
+          <!-- /.widget -->
+        </div>
+        <!-- /column -->
+        <div class="col-md-4 col-lg-3">
+          <div class="widget">
+            <h4 class="widget-title text-white mb-3">Liên hệ</h4>
+            <address class="pe-xl-15 pe-xxl-17">Số 20 Lê Lợi, Hải Phòng, Việt Nam</address>
+            <a href="/cdn-cgi/l/email-protection#85a6"><span class="__cf_email__"
+                data-cfemail="51383f373e11343c30383d7f323e3c">hotro@thuemienbac.vn</span></a><br /> 0889.36.8080
+          </div>
+          <!-- /.widget -->
+        </div>
+        <!-- /column -->
+        <div class="col-md-4 col-lg-3">
+          <div class="widget">
+            <h4 class="widget-title text-white mb-3">Tìm hiểu thêm</h4>
+            <ul class="list-unstyled  mb-0">
+              <li><a href="#">Giới thiệu</a></li>
+              <li><a href="#">Dịch vụ</a></li>
+              <li><a href="#">Hướng dẫn</a></li>
+              <li><a href="#">Liên hệ</a></li>
+            </ul>
+          </div>
+          <!-- /.widget -->
+        </div>
+        <!-- /column -->
+        <div class="col-md-12 col-lg-3">
+          <div class="widget">
+            <h4 class="widget-title text-white mb-3">Tin của chúng tôi</h4>
+            <p class="mb-5">Đăng ký nhận thông tin của chúng tôi để nhận tin tức và giao dịch của chúng tôi gửi đến bạn.
+            </p>
+            <div class="newsletter-wrapper">
+              <!-- Begin Mailchimp Signup Form -->
+              <div id="mc_embed_signup2">
+                <form
+                  action="https://elemisfreebies.us20.list-manage.com/subscribe/post?u=aa4947f70a475ce162057838d&amp;id=b49ef47a9a"
+                  method="post" id="mc-embedded-subscribe-form2" name="mc-embedded-subscribe-form"
+                  class="validate dark-fields" target="_blank" novalidate>
+                  <div id="mc_embed_signup_scroll2">
+                    <div class="mc-field-group input-group form-floating">
+                      <input type="email" value="" name="EMAIL" class="required email form-control"
+                        placeholder="Địa chỉ Email" id="mce-EMAIL2">
+                      <label for="mce-EMAIL2">Địa chỉ Email</label>
+                      <input type="submit" value="Tham gia" name="subscribe" id="mc-embedded-subscribe2"
+                        class="btn btn-primary ">
+                    </div>
+                    <div id="mce-responses2" class="clear">
+                      <div class="response" id="mce-error-response2" style="display:none"></div>
+                      <div class="response" id="mce-success-response2" style="display:none"></div>
+                    </div>
+                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                        name="b_ddc180777a163e0f9f66ee014_4b1bcfa0bc" tabindex="-1" value=""></div>
+                    <div class="clear"></div>
+                  </div>
+                </form>
+              </div>
+              <!--End mc_embed_signup-->
+            </div>
+            <!-- /.newsletter-wrapper -->
+          </div>
+          <!-- /.widget -->
+        </div>
+        <!-- /column -->
+      </div>
+      <!--/.row -->
+    </div>
+    <!-- /.container -->
+  </footer>
+
+<!-- Modal ENP -->
+<div class="modal fade" id="modalENP" tabindex="-1" aria-labelledby="modalENPLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal247Label">ENP</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li>ENP tiếp nhận thông tin đặt hàng đa kênh: Zalo, Facebook, Email và ảnh chụp</li>
+          <li>Quản lý theo quy trình từ đặt hàng, mua nguyên liệu, sản xuất đến giao hàng</li>
+          <li>Phân quyền công việc theo bộ phận, trách nhiệm đến cá nhân</li>
+          <li>Lập kế hoạch theo ngày và giao việc đến công nhân chỉ trong 1 phút</li>
+          <li>Lệnh sản xuất hiển thị trực quan, xem dễ dàng và cập nhật nhanh tiến độ mà không cần tương tác trực tiếp</li>
+          <li>Ứng dụng ENP hỗ trợ tìm kiếm, theo dõi, quản lý sản xuất nhanh nhất</li>
+          <li>Báo cáo sản xuất, chất lượng chỉ bằng 1 cú nhấp chuột</li>
+          <li>Tính giá nhanh và chính xác chi phí cấu thành lên sản phẩm. từ đó cân đối hợp lý giá bán đến tay khách hàng</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal 247 -->
+  <div class="modal fade" id="modal247" tabindex="-1" aria-labelledby="modal247Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal247Label">Hỗ trợ 24/7</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>ENP hỗ trợ khách hàng 24/7, mọi lúc, mọi nơi.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal secure -->
+  <div class="modal fade" id="secure" tabindex="-1" aria-labelledby="secureLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="secureLabel">Bảo mật dữ liệu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Dữ liệu là tập hợp đơn hàng, khách hàng, nhà cung cấp và các đặc điểm hoạt động sản xuất kinh doanh của doanh nghiệp nên việc bảo mật dữ liệu việc tối quan trọng.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal updateDaily -->
+  <div class="modal fade" id="updateDaily" tabindex="-1" aria-labelledby="updateDailyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="updateDailyLabel">Cập nhật nâng cấp</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Do sản xuất bao bì chưa bao giờ là điều dễ dàng?
+            <li>Mẫu hàng liên tục thay đổi.</li>
+            <li>Giao hàng thường xuên gấp gáp.</li>
+            <li>Nguyên vật liệu đa dạng.</li>
+            <li>Máy móc phải cải tiến, mua mới</li>
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal benefit -->
+  <div class="modal fade" id="benefit" tabindex="-1" aria-labelledby="benefitLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="benefitLabel">Lợi ích khi sử dụng</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul>
+            <li>Tăng hiệu suất làm việc của nhân viên lên đến 90 %</li>
+            <li>Công nhân nhận lệnh sản xuất rõ ràng, thao tác đơn giản</li>
+            <li>Giảm sai sót, khắc phục tình trạng khó kiểm soát sai hỏng, công nhân không theo sát tiến độ, hay đổ lỗi</li>
+            <li>Công nghệ tìm kiếm khoa học, tiết kiệm thời gian thực hiện công việc, đồng thời kiểm soát nhanh và chính xác</li>
+            <li>Thống kê sản xuất thông minh, báo cáo nhanh theo yêu cầu của người quản lý</li>
+            <li>Tính lương khoán nhanh và chính xác</li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="progress-wrap">
+    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+      <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+    </svg>
+  </div>
+  <script src="./assets/js/plugins.js"></script>
+  <script src="./assets/js/theme.js"></script>
+</body>
+
+</html>
